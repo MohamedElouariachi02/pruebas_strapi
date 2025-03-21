@@ -1,7 +1,11 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-module.exports = {
+"use strict";
+
+const { createCoreController } = require("@strapi/strapi").factories;
+
+module.exports = createCoreController("api::rutine.rutine", ({ strapi }) => ({
     async login(ctx) {
         const { email, password } = ctx.request.body;
         // Buscar usuario en la base de datos
@@ -35,4 +39,4 @@ module.exports = {
             token
         });
     }
-};
+}));
