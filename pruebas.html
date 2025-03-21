@@ -2,42 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
-<form id="loginForm">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Contraseña" required>
-    <button type="submit">Iniciar sesión</button>
+<form id="formulario">
+  <input type="email" id="name" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button type="submit">Login</button>
 </form>
-
-<script>
-    document.getElementById("loginForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-
-        const response = await fetch("http://localhost:1337/api/user-app/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            console.log("Inicio de sesión exitoso:", data);
-            localStorage.setItem("jwt", data.token); // Guardar el token
-            alert("Bienvenido, sesión iniciada.");
-        } else {
-            console.error("Error en login:", data);
-            alert("Error: " + data.error.message);
-        }
-    });
-</script>
-
 </body>
+<style>
+  form{
+    display: grid;
+  }
+  input
+  {
+    margin-block: 0.5em;
+  }
+</style>
+<script>
+  document.getElementById("formulario").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const email = document.getElementById("name").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("http://localhost:1337/api/user-app/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({email, password})
+    });
+
+    const data = await response.json();
+
+    if(response.ok)
+    {
+      alert("Login successful");
+      localStorage.setItem("jwt", data.token)
+      console.log(data)
+    }
+    else
+    {
+      alert("Login failed");
+    }
+  })
+</script>
 </html>
