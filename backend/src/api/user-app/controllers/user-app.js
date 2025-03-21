@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
-module.exports = createCoreController("api::rutine.rutine", ({ strapi }) => ({
+module.exports = createCoreController("api::user-app.user-app", ({ strapi }) => ({
     async login(ctx) {
         const { email, password } = ctx.request.body;
         // Buscar usuario en la base de datos
@@ -38,5 +38,5 @@ module.exports = createCoreController("api::rutine.rutine", ({ strapi }) => ({
             },
             token
         });
-    }
+    },
 }));
