@@ -1,9 +1,12 @@
-'use strict';
-
-/**
- * user-app router
- */
-
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::user-app.user-app');
+module.exports = {
+    routes: [
+        {
+            method: "POST",
+            path: "/user-app/login",
+            handler: "user-app.login",
+            config: {
+                auth: false
+            }
+        }
+    ]
+};
